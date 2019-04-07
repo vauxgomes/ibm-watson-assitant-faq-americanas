@@ -1,0 +1,614 @@
+{
+  "name": "FAQ",
+  "intents": [
+    {
+      "intent": "Duvida_Formas_Pagamento",
+      "examples": [
+        {
+          "text": "Quais formas de pagamento?"
+        },
+        {
+          "text": "Como possa fazer meus pagamentos?"
+        },
+        {
+          "text": "Que tipos de pagamento eu posso fazer?"
+        },
+        {
+          "text": "Quero pagar"
+        },
+        {
+          "text": "Pagar"
+        },
+        {
+          "text": "Pagamento"
+        },
+        {
+          "text": "Forma de pagamento"
+        }
+      ],
+      "description": "Dúvida sobre as formas de pagamento"
+    },
+    {
+      "intent": "Duvida_Pagamento_A_Vista",
+      "examples": [
+        {
+          "text": "Vocês aceitam pagamento à vista?"
+        },
+        {
+          "text": "À vista, posso pagar meu pedido?"
+        },
+        {
+          "text": "Quero pagar em uma única parcela"
+        },
+        {
+          "text": "Posso pagar à vista?"
+        },
+        {
+          "text": "Posso pagar meu pedido à vista?"
+        },
+        {
+          "text": "É possível pagar à vista?"
+        },
+        {
+          "text": "Tem como pagar à vista?"
+        },
+        {
+          "text": "Pagamento à vista"
+        },
+        {
+          "text": "Pagar pedido à vista"
+        },
+        {
+          "text": "Quero pagar meu produto à vista"
+        }
+      ],
+      "description": "Dúvida sobre pagamento à vista"
+    },
+    {
+      "intent": "Duvida_Pagamento_Parcelado",
+      "examples": [
+        {
+          "text": "E se eu quiser pagar parcelado?"
+        },
+        {
+          "text": "Posso pagar meu pedido parcelado?"
+        },
+        {
+          "text": "É possível pagar em mais de uma?"
+        },
+        {
+          "text": "Pagamento parcelado"
+        },
+        {
+          "text": "Pagar pedido parcelado"
+        },
+        {
+          "text": "Quero pagar a prazo"
+        },
+        {
+          "text": "Vocês aceitam pagamento a prazo?"
+        },
+        {
+          "text": "Quero pagar em @sys-number"
+        },
+        {
+          "text": "Quero pagar em várias vezes"
+        },
+        {
+          "text": "Dividido"
+        },
+        {
+          "text": "Várias parcelas"
+        }
+      ],
+      "description": "Dúvida sobre pagamento à vista"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": []
+    },
+    {
+      "entity": "Tipo_Pagamento",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Cartão",
+          "synonyms": [
+            "Cartão",
+            "Cartão de Crédito"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Boleto",
+          "synonyms": [
+            "Boleto"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Vale",
+          "synonyms": [
+            "Vale"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Débito",
+          "synonyms": [
+            "Débito em conta"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Ame digital",
+          "synonyms": [
+            "Ame",
+            "App Ame",
+            "Aplicativo Ame Digital",
+            "Aplicativo da Ame"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": []
+    }
+  ],
+  "language": "pt-br",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-09-20"
+    }
+  },
+  "description": "",
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Dúvida: Pagamento À Vista: Débito",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Logo após colocar os produtos na cesta e informar seu e-mail e senha, você será direcionado(a) para a tela de pagamento do pedido.\n\nSelecione a opção BANKLINE/VISA ELECTRON\n\nEscolha o banco de sua preferência.\n\nAntes de fechar a compra, confira os dados do pedido, a forma de pagamento e o endereço de entrega. Não será possível alterá-los após a finalização.\n\nApós finalizar o pedido, utilize a opção CLIQUE AQUI PARA PAGAR NO SEU BANCO.\n\nO pagamento será feito em ambiente seguro do próprio banco e a americanas.com não terá acesso aos seus dados bancários.\n\n**IMPORTANTE**: antes de realizar compras por débito em conta, desative o bloqueador de pop-ups do seu computador.\n\nEssa forma de pagamento é somente para pagamento à vista e **não** está disponível para compras pelo Televendas.\n\nO prazo de entrega começa a contar após a confirmação de pagamento pelo banco, que pode levar até dois dias corridos.\n\nSe ocorrer alguma falha no sistema e você não conseguir acessar o internet __banking__, efetue o pagamento no \"__Minha Conta\"__, no tópico “__Pagar com Débito em Conta__”."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "time": 2,
+            "typing": true,
+            "response_type": "pause"
+          }
+        ]
+      },
+      "parent": "node_4_1554664233718",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1554663919517"
+      },
+      "conditions": "@Tipo_Pagamento:Débito",
+      "dialog_node": "node_1_1554665002743",
+      "previous_sibling": "node_5_1554664702024"
+    },
+    {
+      "type": "standard",
+      "title": "Dúvida: Pagamento À Vista: Opções",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O pagamento à vista pode ser efetuado das seguinte maneiras:"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "Opções de pagamento à vista",
+            "options": [
+              {
+                "label": "No Cartão de Crédito",
+                "value": {
+                  "input": {
+                    "text": "pagamento_a_vista_cartão"
+                  }
+                }
+              },
+              {
+                "label": "Via Boleto Bancário",
+                "value": {
+                  "input": {
+                    "text": "pagamento_a_vista_boleto"
+                  }
+                }
+              },
+              {
+                "label": "No Débito em Conta",
+                "value": {
+                  "input": {
+                    "text": "pagamento_a_vista_debito"
+                  }
+                }
+              },
+              {
+                "label": "Com Vale Compras",
+                "value": {
+                  "input": {
+                    "text": "pagamento_a_vista_vale"
+                  }
+                }
+              },
+              {
+                "label": "Através do Ame Digital",
+                "value": {
+                  "input": {
+                    "text": "pagamento_a_vista_ame_digital"
+                  }
+                }
+              }
+            ],
+            "description": "Opções de pagamento à vista",
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_4_1554664233718",
+      "metadata": {},
+      "conditions": "#Duvida_Pagamento_A_Vista",
+      "dialog_node": "node_4_1554665875686",
+      "previous_sibling": "node_3_1554665511424"
+    },
+    {
+      "type": "standard",
+      "title": "Dúvida: Pagamento À Vista: Ame Digital",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Logo após colocar os produtos no carrinho de compras e informar seu e-mail e senha, você será direcionado para a tela de pagamento do pedido.\n\nSelecione a opção **Ame**.\n\nSe você estiver usando o computador, a tela vai mostrar um QR Code.\n\nAbra o aplicativo Ame Digital em seu celular, faça o login e selecione a opção pagar. Use o celular para ler o QR Code que aparece na tela de pagamento do site.\n\nPor meio do celular, confira os dados do pedido, a forma de pagamento e o endereço de entrega, pois não será possível alterá-los após a finalização. Depois de conferir, feche a compra.\n\nSe você estiver usando o celular, clique no botão “Pagar com Ame”. O aplicativo abrirá automaticamente com todas as informações do seu pedido.\n\nConfira os dados do pedido, a forma de pagamento e o endereço de entrega, pois não será possível alterá-los após a finalização. Depois de conferir, feche a compra.\n\nEssa forma de pagamento não está disponível para compras pelo Televendas."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "**Como comprar com cartão de crédito dentro do Ame Digital**\n\nPedidos pagos com cartão de crédito passam por uma checagem de dados cadastrais.\n\nSe houver divergência cadastral, a **americanas.com** entrará em contato com você.\n\nO prazo de entrega informado no site passa a ser considerado após a confirmação dos dados cadastrais e a aprovação do pagamento pela administradora, o que pode acontecer em até 3 (dois) dias corridos.\n\nPedidos que ultrapassem o limite do cartão podem ser recusados pela administradora de cartões.\n\nNão são aceitos cartões de crédito emitidos no exterior, nem pagamentos com 2 (dois) ou mais cartões de crédito, mas o comprador pode usar um cartão de outra pessoa, mesmo que ela não tenha uma conta Ame. O pagamento será submetido à análise e à aprovação da **americanas.com**."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "**Como comprar com saldo da conta Ame Digital**\n\nPedidos pagos com saldo da conta Ame passam por uma checagem de dados cadastrais.\n\nO prazo de entrega informado no site passa a ser considerado após a confirmação dos dados cadastrais e a aprovação do pagamento, o que pode acontecer em até 3 (dois) dias corridos.\n\nAntes de fechar a compra, o cliente pode consultar o saldo da conta Ame. Se ele não for suficiente, pode optar por adicionar mais crédito ou utilizar um cartão de crédito para completar o pagamento.\n\nPodem ser usados saldos de contas Ame de titularidade diferente do comprador, mas eles serão submetidos à análise e à aprovação da **americanas.com**.\n\nAlgumas promoções do site são exclusivas para pagamento com saldo da conta Ame."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "time": 2,
+            "typing": true,
+            "response_type": "pause"
+          }
+        ]
+      },
+      "parent": "node_4_1554664233718",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1554663919517"
+      },
+      "conditions": "@Tipo_Pagamento:(Ame digital)",
+      "dialog_node": "node_3_1554665511424",
+      "previous_sibling": "node_2_1554665213998"
+    },
+    {
+      "type": "standard",
+      "title": "Dúvida: Pagamento À Vista: Boleto",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Logo após colocar os produtos na cesta e informar seu e-mail e senha, você será direcionado(a) para a tela de pagamento do pedido.\n\nNesta tela, clique sobre a opção BOLETO BANCÁRIO.\n\nAntes de fechar a compra, confira os dados do pedido, a forma de pagamento e o endereço de entrega. Não será possível alterá-los após a finalização.\n\nApós finalizado o pedido, use a opção \"imprimir boleto\".\n\nO boleto não é enviado por e-mail (apenas enviamos o link para imprimi-lo) ou pelos Correios. Após impresso, pode ser pago na agência bancária de sua preferência ou pela Internet, até a data de vencimento que consta no documento. Após essa data, ele perde a validade e não poderá ser reimpresso.\n\nEssa forma de pagamento também está disponível para compras pelo Televendas.\n\nPrazo de entrega: após o pagamento do boleto, o banco confirma o recebimento em até 3 (três) dias úteis. O prazo de entrega informado começa a contar somente após a aprovação do pagamento e a checagem dos dados cadastrais.\n\nO não pagamento do boleto até a data de vencimento implica o cancelamento automático dele e da compra, sem qualquer ônus."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "**Como imprimir segunda via de boleto bancário dentro da validade**\n\nAcesse o \"__Minha Conta__\", localize o seu pedido e use a opção \"__Imprimir boleto__\".\n\n**IMPORTANTE**: produtos cuja venda seja proibida a menores de 18 anos, como facas, canivetes, armas de caça e de esportes, bebidas alcoólicas e alguns jogos eletrônicosnão podem ser pagos com boleto. Nesse caso, é obrigatória a utilização da modalidade cartão de crédito ou débito em conta, ainda que o pedido inclua outros itens não sujeitos à restrição."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "time": 0,
+            "typing": true,
+            "response_type": "pause"
+          }
+        ]
+      },
+      "parent": "node_4_1554664233718",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1554663919517"
+      },
+      "conditions": "@Tipo_Pagamento:Boleto",
+      "dialog_node": "node_5_1554664702024",
+      "previous_sibling": "node_1_1554663581524"
+    },
+    {
+      "type": "standard",
+      "title": "Dúvida: Pagamento À Vista: Vale",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Se você recebeu um vale, pode utilizá-lo para pagar suas compras no site.\n\nInsira o código dele no campo \"Deseja usar Vale-Presente?”. Clique em “Utilizar Vale-Presente\", confira se o valor foi calculado corretamente e siga os procedimentos normais para o fechamento do pedido.\n\n**IMPORTANTE**:\n\n - antes de utilizar o vale é necessário desbloqueá-lo no \"Minha Conta\";\n - o vale expira um ano após a data de recebimento, inclusive Vale Corporativo.\n - o vale é identificado com o CPF do(a) comprador(a), o que impede o uso por terceiros;\n - se o valor do vale for menor que o da nova compra, você poderá pagar a diferença somente com cartão de crédito;\n- se o valor do vale for maior que o da compra, você poderá utilizar a diferença em outras compras na americanas.com.\n- se a compra foi paga integralmente com o vale a confirmação de pagamento ocorre em até 72 horas;\n\nClique em CONTINUAR para ser direcionado(a) para a confirmação dos dados do pedido.\n\nAntes de fechar a compra, confira os dados do pedido, a forma de pagamento e o endereço de entrega. Não será possível alterá-los após a finalização."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "time": 2,
+            "typing": true,
+            "response_type": "pause"
+          }
+        ]
+      },
+      "parent": "node_4_1554664233718",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1554663919517"
+      },
+      "conditions": "@Tipo_Pagamento:Vale",
+      "dialog_node": "node_2_1554665213998",
+      "previous_sibling": "node_1_1554665002743"
+    },
+    {
+      "type": "standard",
+      "title": "Dúvida: Pagamento À Vista: Cartão",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Logo após colocar os produtos na cesta e informar seu e-mail e senha, você será direcionado(a) para atela de pagamento do pedido.\n\nSelecione a opção CARTÃO DE CRÉDITO. Basta clicar sobre a bandeira do cartão de sua preferência.\n\nInforme os dados conforme aparecem no cartão de crédito.\n\nAntes de fechar a compra, confira os dados do pedido, a forma de pagamento e o endereço de entrega. Não será possível alterá-los após a finalização.\n\nEssa forma de pagamento também está disponível para compras pelo Televendas.\n\nPara ampliar ainda mais sua segurança, os pedidos pagos com cartão de crédito passam por uma checagem de dados cadastrais.\n\nSe houver divergência cadastral, a americanas.com entrará em contato com você.\n\nO prazo de entrega informado no site passa a ser considerado após confirmação dos dados cadastrais e aprovação do pagamento pela administradora, o que pode ocorrer em até 2 (dois) dias corridos.\n\nPedidos que ultrapassem o limite do cartão podem ser recusados pela administradora de cartões.\n\nNão são aceitos cartões de crédito emitidos no exterior."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "**Regras para pagamento com 2 (dois) cartões de crédito**\n\nO pagamento com dois cartões de crédito é válido apenas para pedidos com valor total acima de R$ 70,00.\n\nO valor mínimo do primeiro cartão de crédito varia de acordo com a bandeira escolhida.\n\nO valor da compra no segundo cartão é calculado automaticamente.\n\nPodem ser usados cartões de pessoas diferentes, mas eles serão submetidos à análise e à aprovação da americanas.com.\n\nAlgumas promoções do site são exclusivas para determinados cartões. Pode haver promoções que não se apliquem a pedidos pagos com dois cartões.\n\nAs demais regras são idênticas às utilizadas em compras com um único cartão."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "time": 2,
+            "typing": true,
+            "response_type": "pause"
+          }
+        ]
+      },
+      "parent": "node_4_1554664233718",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_2_1554663919517"
+      },
+      "conditions": "@Tipo_Pagamento:Cartão",
+      "dialog_node": "node_1_1554663581524"
+    },
+    {
+      "type": "slot",
+      "parent": "node_1_1554658974629",
+      "variable": "$Tipo_Pagamento",
+      "dialog_node": "slot_2_1554659351406"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1554659351406",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1554659351406",
+      "previous_sibling": "handler_3_1554659351406"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_2_1554659351406",
+      "context": {
+        "Tipo_Pagamento": "@Tipo_Pagamento"
+      },
+      "conditions": "@Tipo_Pagamento",
+      "event_name": "input",
+      "dialog_node": "handler_3_1554659351406"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_2_1554663919517"
+    },
+    {
+      "type": "frame",
+      "title": "Dúvida: Formas Pagamento",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Você pode pagar seu pedido de várias maneiras."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          },
+          {
+            "time": 1,
+            "typing": true,
+            "response_type": "pause"
+          },
+          {
+            "values": [
+              {
+                "text": "Sobre qual você gostaria de falar neste momento:"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "Formas de Pagamento",
+            "options": [
+              {
+                "label": "Pagamento à vista",
+                "value": {
+                  "input": {
+                    "text": "pagamento_a_vista"
+                  }
+                }
+              },
+              {
+                "label": "Pagamento parcelado",
+                "value": {
+                  "input": {
+                    "text": "pagamento_parcelado"
+                  }
+                }
+              }
+            ],
+            "description": "Formas de Pagamento",
+            "response_type": "option"
+          }
+        ]
+      },
+      "metadata": {
+        "fallback": "leave"
+      },
+      "conditions": "#Duvida_Formas_Pagamento",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1554658974629",
+      "digress_out": "allow_all",
+      "previous_sibling": "Bem-vindo",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "standard",
+      "title": "Fim",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Caso existam mais dúvidas nos envie uma mensagem."
+              },
+              {
+                "text": "Espero ter tirado a sua dúvida. Nos envie uma mensagem se necessitar."
+              },
+              {
+                "text": "Conseguiu tirar a sua dúvida? Em que mais posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {},
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1554663919517",
+      "previous_sibling": "node_4_1554664233718"
+    },
+    {
+      "type": "folder",
+      "title": "Dúvida: Pagamento À Vista",
+      "metadata": {},
+      "conditions": "#Duvida_Pagamento_A_Vista",
+      "dialog_node": "node_4_1554664233718",
+      "previous_sibling": "node_1_1554658974629"
+    },
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    }
+  ],
+  "workspace_id": "dbae9ea8-4f14-4227-bf8a-f224be86360c",
+  "counterexamples": [],
+  "system_settings": {
+    "tooling": {
+      "store_generic_responses": true
+    }
+  },
+  "learning_opt_out": false,
+  "status": "Available"
+}
