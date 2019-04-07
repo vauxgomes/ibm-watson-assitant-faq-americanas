@@ -1,0 +1,1 @@
+# ibm-watson-assitant-faq-americanas
